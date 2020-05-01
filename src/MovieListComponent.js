@@ -14,7 +14,8 @@ export default class MovieListComponent extends Component {
         this.movieListByUsers[profile.favoriteMovieID] = [profile.userID];
       }
     });
-    console.log(this.movieListByUsers);
+
+    console.log("this.movieListByUsers", this.movieListByUsers);
   }
 
   render() {
