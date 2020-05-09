@@ -18,9 +18,9 @@
     <div>
       <h1>Goal List</h1>
       <input type="text" id="goal" placeholder="Add Goal" /><button
-        id="GoalBtn"
+        id="goalBtn"
       >
-        Add goal
+        Add Goal
       </button>
       <ul id="goals"></ul>
     </div>
@@ -136,7 +136,8 @@
       console.log("The new state is: ", store.getState());
     });
 
-    store.dispatch(
+    {
+      /* store.dispatch(
       addTodoAction({
         id: 0,
         name: "Walk the dog",
@@ -178,6 +179,44 @@
       })
     );
 
-    store.dispatch(removeGoalAction(0));
+    store.dispatch(removeGoalAction(0)); */
+    }
+
+    function generateRandomId() {
+      return (
+        Math.random().toString(36).substring(2) +
+        new Date().getTime().toString(36)
+      );
+    }
+
+    function addTodo() {
+      const input = document.getElementById("todo");
+      const name = input.value;
+      input.value = "";
+
+      store.dispatch(
+        addTodoAction({
+          id: generateRandomId(),
+          name,
+          complete: false,
+        })
+      );
+    }
+
+    function addGoal() {
+      const input = document.getElementById("goal");
+      const name = input.value;
+      input.value = "";
+
+      store.dispatch(
+        addGoalAction({
+          id: generateRandomId(),
+          name,
+        })
+      );
+    }
+
+    document.getElementById("todoBtn").addEventListener("click", addTodo);
+    document.getElementById("goalBtn").addEventListener("click", addGoal);
   </script>
 </html>
