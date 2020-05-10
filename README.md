@@ -15,4 +15,4 @@
 
 ### Redux
 
-- redux-todos
+- [redux-todos](https://github.com/CaesiumY/reactnd-exercise-code/tree/redux-todos)
