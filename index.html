@@ -139,6 +139,8 @@
       Redux.applyMiddleware(checker, logger)
     );
 
+    // DOM code
+
     store.subscribe(() => {
       const { todos, goals } = store.getState();
 
@@ -149,7 +151,6 @@
       goals.forEach(addGoalToDOM);
     });
 
-    // DOM code
     function generateRandomId() {
       return (
         Math.random().toString(36).substring(2) +
@@ -226,7 +227,14 @@
         <ul>
           {props.items.map((item) => (
             <li key={item.id}>
-              <span>{item.name}</span>
+              <span
+                onClick={() => props.toggleItem && props.toggleItem(item.id)}
+                style={{
+                  textDecoration: item.complete ? "line-through" : "none",
+                }}
+              >
+                {item.name}
+              </span>
               <button onClick={() => props.removeItem(item)}>X</button>
             </li>
           ))}
@@ -253,6 +261,10 @@
         this.props.store.dispatch(removeTodoAction(todo.id));
       };
 
+      toggleItem = (id) => {
+        this.props.store.dispatch(toggleTodoAction(id));
+      };
+
       render() {
         return (
           <div>
@@ -263,7 +275,11 @@
               ref={(input) => (this.input = input)}
             />
             <button onClick={this.addItem}>Add Todo</button>
-            <List removeItem={this.removeItem} items={this.props.todos} />
+            <List
+              toggleItem={this.toggleItem}
+              removeItem={this.removeItem}
+              items={this.props.todos}
+            />
           </div>
         );
       }
