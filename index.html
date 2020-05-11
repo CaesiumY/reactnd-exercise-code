@@ -67,12 +67,37 @@
       };
     }
 
+    function handleAddTodoAction(name, callback) {
+      return (dispatch) => {
+        return API.saveTodo(name)
+          .then((todo) => {
+            dispatch(addTodoAction(todo));
+            callback();
+          })
+          .catch((e) => {
+            alert("There was an error. Try again!");
+            callback(name);
+          });
+      };
+    }
+
     function handleRemoveTodoAction(todo) {
       return (dispatch) => {
         dispatch(removeTodoAction(todo.id));
 
         return API.deleteTodo(todo).catch((e) => {
           dispatch(addTodoAction(todo));
+          alert("An error ocurred. Try again!");
+        });
+      };
+    }
+
+    function handleToggleAction(id) {
+      return (dispatch) => {
+        dispatch(toggleTodoAction(id));
+
+        return API.saveTodoToggle(id).catch((e) => {
+          dispatch(toggleTodoAction(id));
           alert("An error ocurred. Try again!");
         });
       };
@@ -211,17 +236,12 @@
     class Todos extends React.Component {
       addItem = (e) => {
         e.preventDefault();
-        const name = this.input.value;
 
-        return API.saveTodo(this.input.value)
-          .then((todo) => {
-            this.props.store.dispatch(addTodoAction(todo));
-            this.input.value = "";
+        this.props.store.dispatch(
+          handleAddTodoAction(this.input.value, (value = "") => {
+            this.input.value = value;
           })
-          .catch((e) => {
-            alert("There was an error. Try again!");
-            this.input.value = name;
-          });
+        );
       };
 
       removeItem = (todo) => {
@@ -229,12 +249,7 @@
       };
 
       toggleItem = (id) => {
-        this.props.store.dispatch(toggleTodoAction(id));
-
-        return API.saveTodoToggle(id).catch((e) => {
-          this.props.store.dispatch(toggleTodoAction(id));
-          alert("An error ocurred. Try again!");
-        });
+        this.props.store.dispatch(handleToggleAction(id));
       };
 
       render() {
