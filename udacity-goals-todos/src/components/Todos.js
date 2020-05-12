@@ -5,6 +5,7 @@ import {
   handleToggle,
 } from "../actions/todos";
 import { connect } from "react-redux";
+import List from "./List";
 
 class Todos extends React.Component {
   addItem = (e) => {
