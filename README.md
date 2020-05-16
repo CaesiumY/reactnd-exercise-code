@@ -1,6 +1,6 @@
-# Udacity React Nanodegree Exercise Repository
+# ⚛Udacity React Nanodegree Exercise Repository📚
 
-## Branches
+## 📌Branches
 
 ### React Fundamentals
 
@@ -17,3 +17,9 @@
 
 - [redux-todos](https://github.com/CaesiumY/reactnd-exercise-code/tree/redux-todos)
 - [react-redux-todos](https://github.com/CaesiumY/reactnd-exercise-code/tree/react-redux-todos)
+
+### External Projects Links
+- [myreads](https://github.com/CaesiumY/reactnd-myreads)
+- [Chirper](https://github.com/CaesiumY/reactnd-chirper)
+- [would you rather](https://github.com/CaesiumY/reactnd-would-you-rather) - *private*
+- [UdaciFitness](https://github.com/CaesiumY/reactnd-UdaciFitness) - *private*
